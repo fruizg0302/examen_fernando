@@ -25,13 +25,9 @@ Para poner a prueba la API debes poseer un token de acceso que puedes generar de
  Si quieres iniciar un ciclo de pruebas completo solo debes hacer un
  `bundle exec rspec`
 
-#Peticiones de ejemplo
-
-
-
 #Request
 
-```curl -X "POST" "http://localhost:3000/token_processor/new" \
+`curl -X "POST" "http://localhost:3000/token_processor/new" \
      -H "Authorization: Token token=d8ee89dddcf84dc28a6bcb7e0aa3341c" \
      -H "Content-Type: application/json" \
      -d $'{
@@ -40,90 +36,16 @@ Para poner a prueba la API debes poseer un token de acceso que puedes generar de
 "expiry_date": "12/17",
 "cvc": "123"
 }'
-```
+`
 
 Lo cual nos devuelve un Token (que mantiene relación con los datos que acabamos de enviar. Esos datos están cifrados en Redis en estos momentos)
 
 Un JSON de respuesta puede ser el siguiente:
-```{"token":"9250fc58ba8c4d0a9b6faed34e1cb7ad"}
-```
+
+`{"token":"9250fc58ba8c4d0a9b6faed34e1cb7ad"}`
 
 Debemos sustituirlo en la cabecera correspondiente para poder acceder a la API
-```curl -X "POST" "http://localhost:3000/transaction/new" \
+`curl -X "POST" "http://localhost:3000/transaction/new" \
      -H "Authorization: Token token=9250fc58ba8c4d0a9b6faed34e1cb7ad" \
      -H "Content-Type: application/json" \
-     -d "{\"token\":\"9f4d85897ac54ad682d8ef667bcd9655\",\"amount\":\"\\\"1200\\\"\"}"
-```
-
-#Peticiones vía Ruby (por si no te gusta cURL)
-
-Obtención de token
-
-```
-require 'net/http'
-require 'json'
-
-
-def send_request
-  uri = URI('http://localhost:3000/token_processor/new')
-
-
-  http = Net::HTTP.new(uri.host, uri.port)
-  dict = {
-            "cvc" => "123",
-            "credit_card_number" => "4152314005194769",
-            "name" => "Fernando Ruiz",
-            "expiry_date" => "12/17"
-        }
-  body = JSON.dump(dict)
-
-
-  req =  Net::HTTP::Post.new(uri)
-
-  req.add_field "Authorization", "Token token=d8ee89dddcf84dc28a6bcb7e0aa3341c"
-
-  req.add_field "Content-Type", "application/json"
-
-  req.body = body
-
-
-  res = http.request(req)
-  puts "Response HTTP Status Code: #{res.code}"
-  puts "Response HTTP Response Body: #{res.body}"
-rescue StandardError => e
-  puts "HTTP Request failed (#{e.message})"
-end
-```
-Cierre del flujo
-
-```
-require 'net/http'
-require 'json'
-def send_request
-  uri = URI('http://localhost:3000/transaction/new')
-
-
-  http = Net::HTTP.new(uri.host, uri.port)
-  dict = {
-            "token" => "9f4d85897ac54ad682d8ef667bcd9655",
-            "amount" => "\"1200\""
-        }
-  body = JSON.dump(dict)
-
-
-  req =  Net::HTTP::Post.new(uri)
-  # Add headers
-  req.add_field "Authorization", "Token token=d8ee89dddcf84dc28a6bcb7e0aa3341c"
-  # Add headers
-  req.add_field "Content-Type", "application/json"
-
-  req.body = body
-
-
-  res = http.request(req)
-  puts "Response HTTP Status Code: #{res.code}"
-  puts "Response HTTP Response Body: #{res.body}"
-rescue StandardError => e
-  puts "HTTP Request failed (#{e.message})"
-end
-```
+     -d "{\"token\":\"9f4d85897ac54ad682d8ef667bcd9655\",\"amount\":\"\\\"1200\\\"\"}"`
