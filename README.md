@@ -15,12 +15,12 @@ Para Redis lo encontrarás en:
 
 Para poner a prueba la API debes poseer un token de acceso que puedes generar de la siguiente manera. Dentro de la carpeta de proyecto
 
-`rails c
- cm = CommercialEntity.new
+`rails c`
+ `cm = CommercialEntity.new
  cm.name = "Some name"
  cm.save`
 
- Esto último generará el token de acceso que utilizarás para hacer peticiones. Se puede consultar mediante su atributo `auth_token`
+ Esto último generará el auth_token que utilizarás para hacer peticiones. Se puede consultar mediante su atributo `CommercialEntity.last.auth_token`
 
  Si quieres iniciar un ciclo de pruebas completo solo debes hacer un
  `bundle exec rspec`
