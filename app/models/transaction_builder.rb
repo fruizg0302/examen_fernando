@@ -13,15 +13,15 @@ class TransactionBuilder
     blacklist_service(deciphered_information_in_hash["credit_card_number"])
   end
 
-  private
+  #private
 
   def blacklist_service(credit_card_number)
     blacklisted_credit_cards = ["4555173000000121", "4098513001237467", "345678000000007"]
     blacklisted_credit_cards.map do |v|
       if v == credit_card_number
-        return true
-      else
         return false
+      else
+        return true
       end
     end
   end
