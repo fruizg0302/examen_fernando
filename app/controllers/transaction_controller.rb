@@ -9,7 +9,11 @@ class TransactionController < ApplicationController
 
     @transaction_builder = TransactionBuilder.new(params[:token], params[:amount])
     if @transaction_builder.it_is_an_authorized_credit_card? && @transaction_builder.does_the_token_exists?
-      @transaction_builder.proceed_with_payload
+      if @transaction_builder.proceed_with_payload
+        return render json: {:message => "Thanks for your purchase"}, status: :ok
+      else
+        return render json: {:message => @transaction_builder.error_message}, status: :bad_request
+      end  
     else
       return render json: {:message => @transaction_builder.error_message}, status: :bad_request
     end

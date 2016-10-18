@@ -46,11 +46,27 @@ class TransactionBuilder
 
  def proceed_with_payload
    hash_information = redis_decipher(@internal_parameters[:token])
-   fake_web_service_payload_receiver(hash_information['credit_card_number'])
-   return true
+   if fake_web_service_payload_receiver(hash_information['credit_card_number'], hash_information['cvc'], hash_information['expiry_date'])
+     database_transaction = Transaction.new
+     database_transaction.credit_card_name = hash_information['name']
+     database_transaction.bin_number = hash_information['bin_number']
+     database_transaction.last_four_digits = hash_information['last_four_digits']
+     database_transaction.expiry_date = hash_information['expiry_date']
+     database_transaction.save()
+     return true
+   else
+     @error_message = "Something went wrong, try later please"
+     return false
+   end
  end
 
-private fake_web_service_payload_receiver
+private
+def fake_web_service_payload_receiver(credit_card_number, cvc, expiry_date)
+  if credit_card_number != nil && credit_card_number != "" && cvc != nil && cvc != "" && expiry_date != nil && expiry_date != ""
+    return true
+  else
+    return false
+  end
 end
 
 private

@@ -36,9 +36,9 @@ class TokenBuilder
 
   def add_issuing_bank_to_parameters
     if @regular_expression_first_digit == '3'
-      return @credit_card_parameters[:bank_issuer] = 'Mastercard'
-    elsif @regular_expression_first_digit == '5'
       return @credit_card_parameters[:bank_issuer] = 'AMEX'
+    elsif @regular_expression_first_digit == '5'
+      return @credit_card_parameters[:bank_issuer] = 'MasterCard'
     elseif @regular_expression_first_digit == '4'
       return @credit_card_parameters[:bank_issuer] = 'VISA'
     else
