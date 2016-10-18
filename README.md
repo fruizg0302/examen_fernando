@@ -66,3 +66,10 @@ El token devuelto debe ser sustituido en el _body_ de nuestra aplicación para c
      -H "Authorization: Token token=9250fc58ba8c4d0a9b6faed34e1cb7ad" \
      -H "Content-Type: application/json" \
      -d "{\"token\":\"9f4d85897ac54ad682d8ef667bcd9655\",\"amount\":\"\\\"1200\\\"\"}"`
+     
+     
+Por cierto las siguientes tarjetas de crédito están en lista negra
+
+4555173000000121", "4098513001237467", "345678000000007
+
+
