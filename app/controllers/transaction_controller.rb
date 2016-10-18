@@ -2,15 +2,16 @@ class TransactionController < ApplicationController
   before_action :authenticate
 
   def new
+
     if params[:token] == nil || params[:token] == "" || params[:amount] == nil || params[:amount] == ""
       return render json: {:message => "bad request"}, status: :bad_request
     end
 
     @transaction_builder = TransactionBuilder.new(params[:token], params[:amount])
-    if @transaction_builder.it_is_an_authorized_credit_card?
+    if @transaction_builder.it_is_an_authorized_credit_card? && @transaction_builder.does_the_token_exists?
       @transaction_builder.proceed_with_payload
     else
-      render json: {:message=> 'There is a problem with your credit card, contact with your bank for further information'}, status: 400
+      return render json: {:message => @transaction_builder.error_message}, status: :bad_request
     end
   end
 
