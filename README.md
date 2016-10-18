@@ -50,9 +50,7 @@ Un JSON de respuesta puede ser el siguiente:
 curl -X "POST" "http://localhost:3000/transaction/new" \
      -H "Authorization: Token token=9250fc58ba8c4d0a9b6faed34e1cb7ad" \
      -H "Content-Type: application/json" \
-     -d "{\"token\":\"9f4d85897ac54ad682d8ef667bcd9655\",\"amount\":\"\\\"1200\\\"\"}"
-     
-```
+     -d "{\"token\":\"9f4d85897ac54ad682d8ef667bcd9655\",\"amount\":\"\\\"1200\\\"\"}"```
 El token es requisito de acceso o de lo contrario no podremos consultar a la API
  
  
