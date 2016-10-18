@@ -2,7 +2,7 @@ class TransactionController < ApplicationController
   before_action :authenticate
 
   def new
-    @transaction_builder = Transaction.new(params[:token], params[:amount])
+    @transaction_builder = TransactionBuilder.new(params[:token], params[:amount])
     if @transaction_builder.it_is_an_authorized_credit_card?
       return true
     end
