@@ -13,7 +13,7 @@ class TransactionController < ApplicationController
         return render json: {:message => "Thanks for your purchase"}, status: :ok
       else
         return render json: {:message => @transaction_builder.error_message}, status: :bad_request
-      end  
+      end
     else
       return render json: {:message => @transaction_builder.error_message}, status: :bad_request
     end
