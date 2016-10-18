@@ -25,7 +25,7 @@ Para poner a prueba la API debes poseer un token de acceso que puedes generar de
  Si quieres iniciar un ciclo de pruebas completo solo debes hacer un
  `bundle exec rspec`
 
- #Peticiones de ejemplo
+#Peticiones de ejemplo
 
 
 
@@ -49,7 +49,7 @@ Un JSON de respuesta puede ser el siguiente:
 ```
 
 Debemos sustituirlo en la cabecera correspondiente para poder acceder a la API
- ```curl -X "POST" "http://localhost:3000/transaction/new" \
+```curl -X "POST" "http://localhost:3000/transaction/new" \
      -H "Authorization: Token token=9250fc58ba8c4d0a9b6faed34e1cb7ad" \
      -H "Content-Type: application/json" \
      -d "{\"token\":\"9f4d85897ac54ad682d8ef667bcd9655\",\"amount\":\"\\\"1200\\\"\"}"
@@ -99,8 +99,6 @@ Cierre del flujo
 ```
 require 'net/http'
 require 'json'
-
-
 def send_request
   uri = URI('http://localhost:3000/transaction/new')
 
