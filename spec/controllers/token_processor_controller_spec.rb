@@ -10,11 +10,22 @@ RSpec.describe TokenProcessorController, type: :controller do
   }
 
 
-  describe "GET #new" do
+  describe "POST #new" do
     it "returns a valid token" do
       post :new, credit_card_data
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "POST #create" do
+   it "returns invalid request" do
+     post :new, {:credit_card_number => '023456789012345'}
+     expect(response).to have_http_status(:bad_request)
+     expect(JSON.parse(response.body)).to include("message" => 'invalid input')
+   end
+ end
+
+
+
 
 end

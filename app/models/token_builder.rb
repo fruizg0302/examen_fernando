@@ -8,4 +8,8 @@ class TokenBuilder
     true
   end
 
+  def save_in_redis()
+    $redis.set("key", @parameters.to_json)
+  end
+  
 end

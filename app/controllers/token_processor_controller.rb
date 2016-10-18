@@ -1,8 +1,12 @@
 class TokenProcessorController < ApplicationController
   def new
-    @token_builder = TokenBuilder.new(params[:credit_card_number], params[:name], params[:expiry_date],)
-    if @token_builder.is_a_valid_credit_card?
-      return render json: {:token => "This is a valid token"}, status: :ok
+    @token_builder = TokenBuilder.new(params[:credit_card_number], params[:name], params[:expiry_date])
+
+    if !@token_builder.is_a_valid_credit_card?
+      return render json: {:message => @token_builder.error_message}, status: :bad_request
     end
-  end
+
+    if @token_builder.save
+      return render json: {:token => "#{@token_builder.token}"}, status: :ok
+    end
 end
