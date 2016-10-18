@@ -10,7 +10,7 @@ development:
 test:
   clients:
     default:
-      database: miniConektaDB_test
+      database: miniConektaDB_dev
       hosts:
         - localhost:27017
       options:

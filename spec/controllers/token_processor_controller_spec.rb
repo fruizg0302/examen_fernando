@@ -46,7 +46,6 @@ RSpec.describe TokenProcessorController, type: :controller do
 
   describe "POST #create" do
    it "returns unauthorize status" do
-     request.env['HTTP_AUTHORIZATION'] = auth_token
      request.env['HTTP_AUTHORIZATION'] = 'Hi! I am a Hacker'
      post :new, credit_card_data
      expect(response).to have_http_status(:unauthorized)
