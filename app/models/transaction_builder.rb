@@ -31,6 +31,17 @@ class TransactionBuilder
     end
   end
 
+def  does_the_amount_make_sense?
+  makes_sense = true
+  if @internal_parameters[:amount].to_i > 0
+    makes_sense = true
+  else
+    makes_sense = false
+    @error_message = "Please validate the amount"
+  end
+  return makes_sense
+end
+
   def blacklist_service(credit_card_number)
     appears_in_black_list = true
     blacklisted_credit_cards = ["4555173000000121", "4098513001237467", "345678000000007"]

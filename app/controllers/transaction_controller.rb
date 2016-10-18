@@ -8,7 +8,7 @@ class TransactionController < ApplicationController
     end
 
     @transaction_builder = TransactionBuilder.new(params[:token], params[:amount])
-    if @transaction_builder.it_is_an_authorized_credit_card? && @transaction_builder.does_the_token_exists?
+    if @transaction_builder.it_is_an_authorized_credit_card? && @transaction_builder.does_the_token_exists? && @transaction_builder.does_the_amount_make_sense?
       if @transaction_builder.proceed_with_payload
         return render json: {:message => "Thanks for your purchase"}, status: :ok
       else
