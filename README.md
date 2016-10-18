@@ -55,7 +55,7 @@ Debemos sustituirlo en la cabecera correspondiente para poder acceder a la API
      -d "{\"token\":\"9f4d85897ac54ad682d8ef667bcd9655\",\"amount\":\"\\\"1200\\\"\"}"
 ```
 
-#Peticiones vía Ruby (por si no te gusta cURL
+#Peticiones vía Ruby (por si no te gusta cURL)
 
 Obtención de token
 
@@ -63,11 +63,11 @@ Obtención de token
 require 'net/http'
 require 'json'
 
-# Request (POST )
+
 def send_request
   uri = URI('http://localhost:3000/token_processor/new')
 
-  # Create client
+
   http = Net::HTTP.new(uri.host, uri.port)
   dict = {
             "cvc" => "123",
@@ -77,16 +77,16 @@ def send_request
         }
   body = JSON.dump(dict)
 
-  # Create Request
+
   req =  Net::HTTP::Post.new(uri)
-  # Add headers
+
   req.add_field "Authorization", "Token token=d8ee89dddcf84dc28a6bcb7e0aa3341c"
-  # Add headers
+
   req.add_field "Content-Type", "application/json"
-  # Set body
+
   req.body = body
 
-  # Fetch Request
+
   res = http.request(req)
   puts "Response HTTP Status Code: #{res.code}"
   puts "Response HTTP Response Body: #{res.body}"
@@ -100,11 +100,11 @@ Cierre del flujo
 require 'net/http'
 require 'json'
 
-# Request (2) (POST )
+
 def send_request
   uri = URI('http://localhost:3000/transaction/new')
 
-  # Create client
+
   http = Net::HTTP.new(uri.host, uri.port)
   dict = {
             "token" => "9f4d85897ac54ad682d8ef667bcd9655",
@@ -112,16 +112,16 @@ def send_request
         }
   body = JSON.dump(dict)
 
-  # Create Request
+
   req =  Net::HTTP::Post.new(uri)
   # Add headers
   req.add_field "Authorization", "Token token=d8ee89dddcf84dc28a6bcb7e0aa3341c"
   # Add headers
   req.add_field "Content-Type", "application/json"
-  # Set body
+
   req.body = body
 
-  # Fetch Request
+
   res = http.request(req)
   puts "Response HTTP Status Code: #{res.code}"
   puts "Response HTTP Response Body: #{res.body}"
