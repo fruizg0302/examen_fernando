@@ -45,11 +45,13 @@ class TransactionBuilder
  end
 
  def proceed_with_payload
-   #simulating transaction
-   #I check once more here is the redis response is nil because if you are out of luck
-   #your session is going to end even tho the token existed
+   hash_information = redis_decipher(@internal_parameters[:token])
+   fake_web_service_payload_receiver(hash_information['credit_card_number'])
    return true
  end
+
+private fake_web_service_payload_receiver
+end
 
 private
   def redis_decipher(token)

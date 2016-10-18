@@ -3,9 +3,9 @@ class TokenBuilder
   include TextCipherHelper
   attr_reader(:credit_card_number, :expiry_date, :name, :token, :error_message)
 
-  def initialize(credit_card_number, expiry_date, name)
+  def initialize(credit_card_number, expiry_date, name, cvc)
     #Constructor, new hash for global availability
-    @credit_card_parameters = {credit_card_number: credit_card_number, expiry_date: expiry_date, name: name}
+    @credit_card_parameters = {credit_card_number: credit_card_number, expiry_date: expiry_date, name: name, cvc: cvc}
   end
 
   def is_a_valid_credit_card?
