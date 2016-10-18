@@ -26,6 +26,8 @@ Construiremos un nuevo objeto vacío
  `cm.save`
 
  Esto último generará el auth_token que utilizarás para hacer peticiones. Se puede consultar mediante su atributo `CommercialEntity.last.auth_token`
+ y debe sustituirlo la cabecera _Authorization_ para obtener acceso a la API.
+
 
  Si quieres iniciar un ciclo de pruebas completo solo debes hacer un
  `bundle exec rspec`
@@ -43,13 +45,23 @@ Construiremos un nuevo objeto vacío
 }'
 `
 
-Lo cual nos devuelve un Token (que mantiene relación con los datos que acabamos de enviar. Esos datos están cifrados en Redis en estos momentos)
-
 Un JSON de respuesta puede ser el siguiente:
-
+Este es un token de tarjeta de crédito
 `{"token":"9250fc58ba8c4d0a9b6faed34e1cb7ad"}`
 
-Debemos sustituirlo en la cabecera correspondiente para poder acceder a la API
+Lo cual nos devuelve un Token (que mantiene relación con los datos que acabamos de enviar. Esos datos están cifrados en Redis en estos momentos)
+
+
+Puedes intentar accederlos entrando a la consola de rails y haciendo un 
+`rails c`
+`$redis.get(cd1f7a9f09294c95a09e59c144b9c369)`
+
+Para ver los datos descifrados necesitas algo como
+
+`TextCipherHelper.decrypt($redis.get('cd1f7a9f09294c95a09e59c144b9c369'))`
+
+El token devuelto debe ser sustituido en el _body_ de nuestra aplicación para completar el flujo
+
 `curl -X "POST" "http://localhost:3000/transaction/new" \
      -H "Authorization: Token token=9250fc58ba8c4d0a9b6faed34e1cb7ad" \
      -H "Content-Type: application/json" \
