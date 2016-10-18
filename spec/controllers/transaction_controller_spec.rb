@@ -7,7 +7,7 @@ RSpec.describe TransactionController, type: :controller do
   }
 
   describe "POST #new" do
-    token_builder = TokenBuilder.new("523456789012345", "05/22", "Jack Bauer")
+    token_builder = TokenBuilder.new("4152314005194769", "05/22", "Jack Bauer")
     token_builder.save
     it "returns http success" do
       request.env['HTTP_AUTHORIZATION'] = auth_token

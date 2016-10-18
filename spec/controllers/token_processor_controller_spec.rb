@@ -7,11 +7,19 @@ RSpec.describe TokenProcessorController, type: :controller do
   }
 
   let(:credit_card_data){
-    {credit_card_number: "523456799012334",
+    {credit_card_number: "4152314005194769",
     name: "Avery Johnson",
     expiry_date: "15/19",
     is_credit: true}
   }
+
+  describe "POST #create" do
+    it "returns valid credit card number" do
+      request.env['HTTP_AUTHORIZATION'] = auth_token
+      post :new, credit_card_data
+      expect(response).to have_http_status(:success)
+    end
+  end
 
  describe "POST #create" do
    it "returns invalid credit card number" do

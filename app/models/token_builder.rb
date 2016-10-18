@@ -47,7 +47,7 @@ class TokenBuilder
   end
 
   def add_bin_number_to_parameters
-    @credit_card_parameters[:bin_number] = /^(([0-9]{6})[0-9]{9})$/.match(@credit_card_parameters[:credit_card_number])[2]
+    @credit_card_parameters[:bin_number] = /^(([0-9]{6})[0-9]{9,10})$/.match(@credit_card_parameters[:credit_card_number])[2]
   end
 
   def add_last_four_digits_to_parameters

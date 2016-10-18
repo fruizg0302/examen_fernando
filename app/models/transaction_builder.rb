@@ -11,9 +11,15 @@ class TransactionBuilder
     #If there is a service that asks for black listed credit cards, should be implemented here
     deciphered_hash = redis_decipher(@internal_parameters[:token])
     if deciphered_hash == nil
-      return @error_message = "There is a problem with your card, contact your bank for further information"
+      @error_message = "Your session ended, try again"
+      return false
+    end
+
+    if blacklist_service(deciphered_hash["credit_card_number"])
+      @error_message = "There is a problem with your card, contact your bank for further information"
+      return false
     else
-      return !blacklist_service(deciphered_hash["credit_card_number"])
+      return true
     end
   end
 
@@ -26,16 +32,16 @@ class TransactionBuilder
   end
 
   def blacklist_service(credit_card_number)
-    blacklisted= ""
+    appears_in_black_list = true
     blacklisted_credit_cards = ["4555173000000121", "4098513001237467", "345678000000007"]
     blacklisted_credit_cards.map do |v|
       if v == credit_card_number
-        blacklisted = true
+        appears_in_black_list = true
       else
-        blacklisted = false
+        appears_in_black_list = false
       end
     end
-    return blacklisted;
+    return appears_in_black_list;
  end
 
  def proceed_with_payload
