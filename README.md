@@ -32,11 +32,17 @@ Construiremos un nuevo objeto vacío
  Si quieres iniciar un ciclo de pruebas completo solo debes hacer un
  `bundle exec rspec`
 
- ## Nota! 
+## Nota! 
  Las pruebas que utilicen un token de acceso fracasaran si no actualizamos el token de acceso descrito en
  `let(:auth_token) {
    'Token token="d8ee89dddcf84dc28a6bcb7e0aa3341c"'
- }``
+ }`
+ 
+ En las pruebas
+ 
+`spec/controllers/token_processor_controller_spec.rb`
+ y
+`spec/controllers/transaction_controllerr_spec.rb`
 
 #Request
 
