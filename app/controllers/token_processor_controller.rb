@@ -10,6 +10,8 @@ class TokenProcessorController < ApplicationController
       return render json: {:token => "#{@token_builder.token}"}, status: :ok
     end
   end
+
+
   protected
     def authenticate
       authenticate_token || render_unauthorized
