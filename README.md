@@ -25,6 +25,11 @@ Para poner a prueba la API debes poseer un token de acceso que puedes generar de
  Si quieres iniciar un ciclo de pruebas completo solo debes hacer un
  `bundle exec rspec`
 
+ Nota! Las pruebas que utilicen un token de acceso fracasaran si no actualizamos el token de acceso descrito en
+ `let(:auth_token) {
+   'Token token="d8ee89dddcf84dc28a6bcb7e0aa3341c"'
+ }``
+
 #Request
 
 `curl -X "POST" "http://localhost:3000/token_processor/new" \
