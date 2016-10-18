@@ -15,10 +15,15 @@ Para Redis lo encontrarás en:
 
 Para poner a prueba la API debes poseer un token de acceso que puedes generar de la siguiente manera. Dentro de la carpeta de proyecto
 
+Iniciaremos la consola de rails
 `rails c`
- `cm = CommercialEntity.new
- cm.name = "Some name"
- cm.save`
+Construiremos un nuevo objeto vacío
+ `cm = CommercialEntity.new`
+ Le pondremos un nombre al atributo
+ 
+ `cm.name = "Some name"`
+ Al final salvaremos
+ `cm.save`
 
  Esto último generará el auth_token que utilizarás para hacer peticiones. Se puede consultar mediante su atributo `CommercialEntity.last.auth_token`
 
